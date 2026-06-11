@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import AccountMenu from "../_components/AccountMenu";
 import CartLink from "../_components/CartLink";
+import MobileNavMenu from "../_components/MobileNavMenu";
 import { getFooterLinkProps } from "../_components/footerRoutes";
 import {
   fetchOrderHistory,
@@ -74,6 +75,7 @@ export default function HistoryPage() {
             <Link href="/catalog">Best Sellers</Link>
           </div>
         </div>
+          <MobileNavMenu />
 
         <div className="nav-actions">
           <Link className="search-pill history-search-link" href="/tracking">

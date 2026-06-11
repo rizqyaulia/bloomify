@@ -6,6 +6,7 @@ import {
 import Link from "next/link";
 import AccountMenu from "../_components/AccountMenu";
 import CartLink from "../_components/CartLink";
+import MobileNavMenu from "../_components/MobileNavMenu";
 import CatalogSearchForm from "../_components/CatalogSearchForm";
 import { getFooterLinkProps } from "../_components/footerRoutes";
 
@@ -69,6 +70,7 @@ export default function OccasionsPage() {
             <Link href="/catalog">Best Sellers</Link>
           </div>
         </div>
+          <MobileNavMenu />
 
         <div className="nav-actions occasions-nav-actions">
           <CatalogSearchForm />

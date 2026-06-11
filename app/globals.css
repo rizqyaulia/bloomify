@@ -182,6 +182,63 @@ img {
   transform: scale(0.94);
 }
 
+.mobile-nav-menu {
+  position: relative;
+  display: none;
+  flex: 0 0 auto;
+}
+
+.mobile-menu-button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.mobile-menu-button:hover {
+  color: var(--primary);
+  background: rgb(255 217 224 / 30%);
+}
+
+.mobile-menu-button:active {
+  transform: scale(0.94);
+}
+
+.mobile-menu-dropdown {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 12px);
+  left: 0;
+  display: grid;
+  min-width: 190px;
+  overflow: hidden;
+  background: rgb(255 248 246 / 98%);
+  border: 1px solid rgb(213 194 197 / 58%);
+  border-radius: 12px;
+  box-shadow: 0 22px 52px -34px rgb(30 22 24 / 55%);
+}
+
+.mobile-menu-dropdown a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.mobile-menu-dropdown a:hover,
+.mobile-menu-dropdown a.active {
+  color: var(--primary);
+  background: rgb(255 217 224 / 38%);
+}
+
 .cart-button {
   position: relative;
 }
@@ -5383,5 +5440,74 @@ p {
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 2.3;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-shell:not(.admin-shell) .topbar {
+    display: flex;
+    gap: 10px;
+  }
+
+  .site-shell:not(.admin-shell) .brand-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .site-shell:not(.admin-shell) .topbar .nav-links {
+    display: none;
+  }
+
+  .site-shell:not(.admin-shell) .topbar .mobile-nav-menu {
+    display: block;
+  }
+
+  .site-shell:not(.admin-shell) .topbar .search-pill {
+    display: flex;
+    width: clamp(150px, 34vw, 220px);
+  }
+}
+
+@media (max-width: 640px) {
+  .site-shell:not(.admin-shell) .topbar {
+    padding-inline: clamp(12px, 4vw, 20px);
+  }
+
+  .site-shell:not(.admin-shell) .brand {
+    font-size: 25px;
+  }
+
+  .site-shell:not(.admin-shell) .topbar .search-pill {
+    width: clamp(116px, 31vw, 165px);
+    height: 38px;
+    gap: 6px;
+    padding-inline: 12px;
+  }
+
+  .site-shell:not(.admin-shell) .topbar .search-pill input {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 430px) {
+  .site-shell:not(.admin-shell) .topbar {
+    gap: 6px;
+  }
+
+  .site-shell:not(.admin-shell) .brand-row {
+    gap: 4px;
+  }
+
+  .site-shell:not(.admin-shell) .brand {
+    font-size: 22px;
+  }
+
+  .site-shell:not(.admin-shell) .topbar .search-pill {
+    width: 108px;
+    padding-inline: 10px;
+  }
+
+  .site-shell:not(.admin-shell) .topbar .nav-actions {
+    gap: 2px;
   }
 }

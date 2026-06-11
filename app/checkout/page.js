@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import AccountMenu from "../_components/AccountMenu";
 import CartLink from "../_components/CartLink";
+import MobileNavMenu from "../_components/MobileNavMenu";
 import CatalogSearchForm from "../_components/CatalogSearchForm";
 import { getFooterLinkProps } from "../_components/footerRoutes";
 import { formatCurrencyIDR } from "../_lib/currency";
@@ -249,6 +250,7 @@ export default function CheckoutPage() {
             <Link href="/catalog">Best Sellers</Link>
           </div>
         </div>
+          <MobileNavMenu />
 
         <div className="nav-actions">
           <CatalogSearchForm className="search-pill checkout-search-pill" iconSize={22} />

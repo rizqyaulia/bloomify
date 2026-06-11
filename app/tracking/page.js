@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import AccountMenu from "../_components/AccountMenu";
 import CartLink from "../_components/CartLink";
+import MobileNavMenu from "../_components/MobileNavMenu";
 import { getFooterLinkProps, gmailSupportHref } from "../_components/footerRoutes";
 import {
   confirmOrderReceived,
@@ -160,6 +161,7 @@ export default function TrackingPage() {
             <Link href="/catalog">Best Sellers</Link>
           </div>
         </div>
+          <MobileNavMenu />
 
         <div className="nav-actions">
           <form className="search-pill tracking-search-pill" onSubmit={handleTrackingSearch}>

@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import AccountMenu from "../_components/AccountMenu";
 import CartLink from "../_components/CartLink";
+import MobileNavMenu from "../_components/MobileNavMenu";
 import CatalogSearchForm from "../_components/CatalogSearchForm";
 import { getFooterLinkProps } from "../_components/footerRoutes";
 import { addApiCartItem, fetchProductBySlug, normalizeProduct } from "../_lib/api";
@@ -137,6 +138,7 @@ export default function ProductDetailPage() {
             </Link>
           </div>
         </div>
+          <MobileNavMenu />
 
         <div className="nav-actions">
           <CatalogSearchForm className="search-pill product-search-pill" iconSize={22} />

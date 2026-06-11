@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import AccountMenu from "../_components/AccountMenu";
 import ActionButton from "../_components/ActionButton";
 import CartLink from "../_components/CartLink";
+import MobileNavMenu from "../_components/MobileNavMenu";
 import { getFooterLinkProps } from "../_components/footerRoutes";
 import { addCartItem } from "../_lib/mockStore";
 import { addApiCartItem, fetchProducts, normalizeProduct } from "../_lib/api";
@@ -137,6 +138,7 @@ export default function CatalogPage() {
             </Link>
           </div>
         </div>
+          <MobileNavMenu />
 
         <div className="nav-actions">
           <label className="search-pill">

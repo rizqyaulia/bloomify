@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from "react";
 import AccountMenu from "../_components/AccountMenu";
 import ActionButton from "../_components/ActionButton";
 import CartLink from "../_components/CartLink";
+import MobileNavMenu from "../_components/MobileNavMenu";
 import CatalogSearchForm from "../_components/CatalogSearchForm";
 import { getFooterLinkProps } from "../_components/footerRoutes";
 import { fetchProducts, normalizeProduct, productMatchesCategory } from "../_lib/api";
@@ -80,6 +81,7 @@ export default function GraduationPage() {
             <Link href="/catalog">Best Sellers</Link>
           </div>
         </div>
+          <MobileNavMenu />
 
         <div className="nav-actions">
           <CatalogSearchForm />
