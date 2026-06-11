@@ -6,6 +6,7 @@ return [
     'allowed_origins' => [
         env('FRONTEND_URL', 'http://127.0.0.1:3000'),
         'http://localhost:3000',
+        'https://bloomify-five.vercel.app',
     ],
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
