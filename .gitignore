@@ -1,0 +1,15 @@
+.next/
+.next-build/
+node_modules/
+backend-laravel12-contract/vendor/
+backend-laravel12-contract/storage/logs/
+.tmp/
+.npm-cache/
+*.log
+
+.env
+.env.local
+
+backend-laravel12-contract/.env
+backend-laravel12-contract/bootstrap/cache/*.php
+backend-laravel12-contract/storage/logs/*
