@@ -30,7 +30,9 @@ import {
   createApiPayment,
   fetchCartItems,
   getCurrentUser,
+  getLoginRedirectHref,
   getItemGreetingMessage,
+  isAuthenticated,
   removeApiCartItem,
   resolveProductImageUrl,
   updateApiCartItem,
@@ -129,6 +131,11 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     async function loadCart() {
+      if (!isAuthenticated()) {
+        router.replace(getLoginRedirectHref("/checkout"));
+        return;
+      }
+
       try {
         setCartItems(await fetchCartItems());
       } catch {
@@ -137,7 +144,7 @@ export default function CheckoutPage() {
     }
 
     loadCart();
-  }, []);
+  }, [router]);
 
   function handleFileChange(event) {
     const file = event.target.files?.[0];
@@ -176,6 +183,11 @@ export default function CheckoutPage() {
 
   async function handleCompleteOrder() {
     if (isCartEmpty || isCompleting) {
+      return;
+    }
+
+    if (!isAuthenticated()) {
+      router.push(getLoginRedirectHref("/checkout"));
       return;
     }
 

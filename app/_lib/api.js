@@ -15,14 +15,20 @@ function notifyAuthUpdated() {
   }
 }
 
+export function getAuthToken() {
+  return typeof window !== "undefined" ? window.localStorage.getItem("bloomifyToken") || "" : "";
+}
+
 async function request(path, options = {}) {
   const isFormData =
     typeof FormData !== "undefined" && options.body instanceof FormData;
+  const token = getAuthToken();
   const response = await fetch(`${apiBaseUrl}${path}`, {
     cache: "no-store",
     headers: {
       Accept: "application/json",
       ...(isFormData ? {} : { "Content-Type": "application/json" }),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...(options.headers || {}),
     },
     ...options,
@@ -222,6 +228,20 @@ function getCartIdentity() {
 
 export function getCurrentUser() {
   return getStoredUser();
+}
+
+export function isAuthenticated() {
+  return Boolean(getStoredUser()?.id && getAuthToken());
+}
+
+export function getLoginRedirectHref(targetPath) {
+  const fallback =
+    typeof window !== "undefined"
+      ? `${window.location.pathname}${window.location.search}`
+      : "/checkout";
+  const target = targetPath || fallback;
+
+  return `/login?redirect=${encodeURIComponent(target)}`;
 }
 
 export async function registerCustomer(payload) {

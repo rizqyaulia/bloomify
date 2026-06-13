@@ -8,6 +8,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import AccountMenu from "../_components/AccountMenu";
 import ActionButton from "../_components/ActionButton";
@@ -15,7 +16,7 @@ import CartLink from "../_components/CartLink";
 import MobileNavMenu from "../_components/MobileNavMenu";
 import { getFooterLinkProps } from "../_components/footerRoutes";
 import { addCartItem } from "../_lib/mockStore";
-import { addApiCartItem, fetchProducts, normalizeProduct } from "../_lib/api";
+import { addApiCartItem, fetchProducts, getLoginRedirectHref, isAuthenticated, normalizeProduct } from "../_lib/api";
 import { formatCurrencyIDR } from "../_lib/currency";
 
 const catalogPageSize = 6;
@@ -41,6 +42,7 @@ export default function CatalogPage() {
   const [categories, setCategories] = useState([]);
   const [occasion, setOccasion] = useState("");
   const [maxPrice, setMaxPrice] = useState(500000);
+  const router = useRouter();
 
   useEffect(() => {
     const initialParams = new URLSearchParams(window.location.search);
@@ -89,6 +91,11 @@ export default function CatalogPage() {
   }
 
   async function handleAddToCart(product) {
+    if (!isAuthenticated()) {
+      router.push(getLoginRedirectHref("/catalog"));
+      return;
+    }
+
     try {
       await addApiCartItem(product, { size: "Standard" });
       setRecentlyAddedId(product.id);

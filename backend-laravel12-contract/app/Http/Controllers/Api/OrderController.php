@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,16 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request): JsonResponse
     {
         $validated = $request->validated();
+        $token = $request->bearerToken();
+        $user = $token ? User::where('api_token', $token)->first() : null;
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Please login before placing an order.',
+            ], 401);
+        }
+
+        $validated['user_id'] = $user->id;
 
         $order = DB::transaction(function () use ($validated) {
             $items = collect($validated['items'])->map(function (array $item) {

@@ -13,7 +13,7 @@ import CartLink from "../_components/CartLink";
 import MobileNavMenu from "../_components/MobileNavMenu";
 import CatalogSearchForm from "../_components/CatalogSearchForm";
 import { getFooterLinkProps } from "../_components/footerRoutes";
-import { addApiCartItem, fetchProductBySlug, normalizeProduct } from "../_lib/api";
+import { addApiCartItem, fetchProductBySlug, getLoginRedirectHref, isAuthenticated, normalizeProduct } from "../_lib/api";
 import { addCartItem } from "../_lib/mockStore";
 
 const sizes = ["Small", "Medium", "Large"];
@@ -74,6 +74,11 @@ export default function ProductDetailPage() {
   async function handleSubmit(event) {
     event.preventDefault();
     if (!product) {
+      return;
+    }
+
+    if (!isAuthenticated()) {
+      router.push(getLoginRedirectHref());
       return;
     }
 

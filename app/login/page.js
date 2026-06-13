@@ -6,6 +6,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { loginCustomer } from "../_lib/api";
 
+function getSafeRedirectTarget(value, fallback) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) {
+    return fallback;
+  }
+
+  return value;
+}
+
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isBusy, setIsBusy] = useState(false);
@@ -25,8 +33,13 @@ export default function LoginPage() {
         password,
       });
       const isAdmin = result.user?.role === "admin";
+      const redirectParam =
+        typeof window !== "undefined"
+          ? new URLSearchParams(window.location.search).get("redirect")
+          : "";
+      const redirectTo = getSafeRedirectTarget(redirectParam, "/catalog");
       setIsBusy(false);
-      router.push(isAdmin ? "/admin" : "/");
+      router.push(isAdmin ? "/admin" : redirectTo);
     } catch (error) {
       setIsBusy(false);
       setMessage(error.message || "Unable to sign in.");
